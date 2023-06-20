@@ -1,5 +1,6 @@
 package com.cec.customer;
 
+import com.cec.customer.exception.ResourceNotFound;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class CustomerService {
 
     public Customer getCustomer(Integer id) {
         return customerDao.selectCustomerById(id)
-                .orElseThrow(() -> new IllegalArgumentException(
+                .orElseThrow(() -> new ResourceNotFound(
                         "customer with id [%s] not found".formatted(id)
                 ));
     }
