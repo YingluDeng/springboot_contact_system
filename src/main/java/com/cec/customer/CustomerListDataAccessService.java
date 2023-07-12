@@ -6,14 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Repository("list")
 public class CustomerListDataAccessService implements CustomerDao {
     //db
     private static List<Customer> customers;
     static {
         customers = new ArrayList<>();
         Customer alex = new Customer(
-                1,
                 "Alex",
                 "alex@gmail.com",
                 21
@@ -21,7 +20,6 @@ public class CustomerListDataAccessService implements CustomerDao {
         customers.add(alex);
 
         Customer amy = new Customer(
-                2,
                 "Amy",
                 "amy@gmail.com",
                 18
