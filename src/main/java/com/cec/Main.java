@@ -1,20 +1,12 @@
 package com.cec;
 
 
-import com.cec.customer.CustomerController;
-import com.cec.customer.CustomerDataAccessService;
-import com.cec.customer.CustomerService;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 @SpringBootApplication
 //@ComponentScan(basePackages = "com.cec")

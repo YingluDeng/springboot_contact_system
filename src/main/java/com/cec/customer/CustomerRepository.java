@@ -1,4 +1,8 @@
 package com.cec.customer;
 
-public interface CustomerRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CustomerRepository
+        extends JpaRepository<Customer, Integer> {
+
 }
