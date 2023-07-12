@@ -1,8 +1,8 @@
 package com.cec.customer;
 
-import com.cec.customer.exception.ResourceNotFound;
+import com.cec.customer.exception.DuplicateResourceException;
+import com.cec.customer.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +21,27 @@ public class CustomerService {
 
     public Customer getCustomer(Integer id) {
         return customerDao.selectCustomerById(id)
-                .orElseThrow(() -> new ResourceNotFound(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "customer with id [%s] not found".formatted(id)
                 ));
+    }
+
+    public void addCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
+        // check email exist
+        String email = customerRegistrationRequest.email();
+        if (customerDao.existsPersonWithEmail(email)) {
+            throw new DuplicateResourceException(
+                    "email already taken"
+            );
+        }
+
+
+        // add
+        Customer customer = new Customer(
+                customerRegistrationRequest.name(),
+                customerRegistrationRequest.email(),
+                customerRegistrationRequest.age()
+        );
+        customerDao.insertCustomer(customer);
     }
 }
