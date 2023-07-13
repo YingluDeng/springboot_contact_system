@@ -7,4 +7,5 @@ public interface CustomerRepository
 
 
     boolean existsCustomerByEmail(String email);
+    boolean existsCustomerById(Integer id);
 }
