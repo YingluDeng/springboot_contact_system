@@ -3,6 +3,8 @@ package com.cec;
 
 import com.cec.customer.Customer;
 import com.cec.customer.CustomerRepository;
+import com.github.javafaker.Faker;
+import com.github.javafaker.Name;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.Scope;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @SpringBootApplication
 //@ComponentScan(basePackages = "com.cec")
@@ -31,20 +34,17 @@ public class Main {
     @Bean
     CommandLineRunner runner(CustomerRepository customerRepository) {
         return args -> {
-            Customer alex = new Customer(
-                    "Alex",
-                    "alex@gmail.com",
-                    21
+            var faker = new Faker();
+            Random random = new Random();
+            Name name = faker.name();
+            String firstName = name.firstName();
+            String lastName = name.lastName();
+            Customer customer = new Customer(
+                    firstName + " " + lastName,
+                    firstName.toLowerCase() + "." + lastName.toLowerCase() + "@gamil.com",
+                    random.nextInt(18, 50)
             );
-
-            Customer amy = new Customer(
-                    "Amy",
-                    "amy@gmail.com",
-                    18
-            );
-
-            List<Customer> customers = List.of(alex, amy);
-//            customerRepository.saveAll(customers);
+            customerRepository.save(customer);
         };
     }
 
